@@ -17,7 +17,6 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   geometry_msgs
   nav_msgs
-  cloud_msgs
   message_generation
 )
 
@@ -40,7 +39,7 @@ generate_messages(
 
 catkin_package(
   INCLUDE_DIRS include
-  CATKIN_DEPENDS cloud_msgs
+  CATKIN_DEPENDS
   message_runtime 
   message_generation
   DEPENDS PCL
@@ -62,11 +61,9 @@ link_directories(
 )
 
 add_executable(imageProjection src/imageProjection.cpp)
-add_dependencies(imageProjection ${catkin_EXPORTED_TARGETS} cloud_msgs_gencpp)
 target_link_libraries(imageProjection ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenCV_LIBRARIES})
 
 add_executable(featureAssociation src/featureAssociation.cpp)
-add_dependencies(featureAssociation ${catkin_EXPORTED_TARGETS} cloud_msgs_gencpp)
 target_link_libraries(featureAssociation ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenCV_LIBRARIES})
 
 add_executable(mapOptmization src/mapOptmization.cpp)
