@@ -18,15 +18,31 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   nav_msgs
   cloud_msgs
+  message_generation
 )
 
 find_package(GTSAM REQUIRED QUIET)
 find_package(PCL REQUIRED QUIET)
 find_package(OpenCV REQUIRED QUIET)
 
+add_message_files(
+  DIRECTORY msg
+  FILES
+  cloud_info.msg
+)
+
+generate_messages(
+  DEPENDENCIES
+  geometry_msgs
+  std_msgs
+  nav_msgs
+)
+
 catkin_package(
   INCLUDE_DIRS include
   CATKIN_DEPENDS cloud_msgs
+  message_runtime 
+  message_generation
   DEPENDS PCL
 )
 
